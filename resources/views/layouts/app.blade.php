@@ -27,6 +27,9 @@
 
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
+
     @livewireStyles
 
     @tallStackUiScript
@@ -58,6 +61,9 @@
     @livewire('offline-state')
 
     @livewireScripts
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
 </body>
 
 </html>

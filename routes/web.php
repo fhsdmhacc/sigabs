@@ -7,7 +7,9 @@ use App\Livewire\Home;
 use App\Livewire\Index;
 use App\Livewire\Questions\CreateQuestion;
 use App\Livewire\Questions\QuestionIndex;
-use App\Livewire\Register;
+use App\Livewire\Recognize;
+use App\Livewire\Result;
+use App\Livewire\Verification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +30,14 @@ Route::middleware([
     Route::get('/', Index::class)
         ->name('index');
 
-    Route::get('register', Register::class)
-        ->name('register');
+    Route::get('verification', Verification::class)
+        ->name('verification');
+
+    Route::get('recognize/{student}', Recognize::class)
+        ->name('recognize');
+
+    Route::get('result/{student}', Result::class)
+        ->name('result');
 
     Route::get('login', Login::class)
         ->name('login');

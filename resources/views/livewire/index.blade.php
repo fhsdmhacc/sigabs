@@ -86,7 +86,7 @@
                 </p>
 
                 <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <x-anchor :href="route('register')"
+                    <x-anchor :href="route('verification')"
                         class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-opacity-80">
                         {{ __('Mulai sekarang') }}
                     </x-anchor>
