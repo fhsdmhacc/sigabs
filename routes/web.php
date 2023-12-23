@@ -5,10 +5,13 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Home;
 use App\Livewire\Index;
-use App\Livewire\Questions\CreateQuestion;
-use App\Livewire\Questions\QuestionIndex;
 use App\Livewire\Recognize;
 use App\Livewire\Result;
+use App\Livewire\Results\ResultIndex;
+use App\Livewire\Students\CreateStudent;
+use App\Livewire\Students\EditStudent;
+use App\Livewire\Students\StudentIndex;
+use App\Livewire\Students\StudentUpload;
 use App\Livewire\Verification;
 use Illuminate\Support\Facades\Route;
 
@@ -61,14 +64,28 @@ Route::middleware([
     ])
     ->group(function () {
         Route::group([
-            'prefix'=>'questions',
-            'as'=>'questions.'
+            'prefix'=>'students',
+            'as'=>'students.'
         ], function () {
-            Route::get('/', QuestionIndex::class)
-            ->name('index');
+            Route::get('/', StudentIndex::class)
+                ->name('index');
 
-            Route::get('create', CreateQuestion::class)
+            Route::get('create', CreateStudent::class)
                 ->name('create');
+
+            Route::get('/{student}/edit', EditStudent::class)
+                ->name('edit');
+
+            Route::get('upload', StudentUpload::class)
+                ->name('upload');
+        });
+
+        Route::group([
+            'prefix'=>'results',
+            'as'=>'results.'
+        ], function () {
+            Route::get('/', ResultIndex::class)
+            ->name('index');
         });
     });
 });

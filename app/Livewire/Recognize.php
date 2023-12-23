@@ -2,9 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Result;
 use App\Models\Student;
+use App\Models\Type;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
@@ -89,10 +91,10 @@ class Recognize extends Component
 
         $this->questions = Question::with('options')->get();
 
-        $results = Result::where('student_id', $student->id)->get();
+        $answers = Answer::where('student_id', $student->id)->get();
 
-        foreach ($results as $result) {
-            $this->{'test_' . $result->question_id} = $result->value;
+        foreach ($answers as $answer) {
+            $this->{'test_' . $answer->question_id} = $answer->value;
         }
     }
 
@@ -112,19 +114,39 @@ class Recognize extends Component
             ]
         );
 
-        Result::updateOrCreate(
+        Answer::updateOrCreate(
             [
-                'student_id' => $this->student->id,
+                'student_id' => $this->id,
                 'question_id' => $this->step,
             ],
             [
-                'student_id' => $this->student->id,
+                'student_id' => $this->id,
                 'question_id' => $this->step,
                 'value' => $this->{'test_' . $this->step},
             ]
         );
 
         if ($this->step == 30) {
+            $answers = Answer::where('student_id', $this->id)
+                            ->selectRaw('count(value) as values_count, student_id, value')
+                            ->groupBy('value')
+                            ->orderByDesc('values_count')
+                            ->get();
+
+            foreach ($answers as $answer) {
+                $type = Type::firstWhere('value', $answer->value);
+
+                Result::updateOrCreate(
+                    [
+                        'student_id' => $this->student->id,
+                        'type_id' => $type->id,
+                    ],
+                    [
+                        'total' => $answer->values_count
+                    ]
+                );
+            }
+
             return $this->redirect(route('result', $this->student->uuid), navigate: true);
         }
 

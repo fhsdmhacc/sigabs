@@ -19,7 +19,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         // create permissions
         $permissions = [
-            'questions' => ['index', 'create', 'update'],
+            'students' => ['index', 'create', 'update'],
             // 'payroll_components' => ['update'],
             // 'users' => ['index', 'create', 'read', 'update'],
             // 'locations' => ['index', 'create', 'read', 'update'],
@@ -60,7 +60,7 @@ class RoleAndPermissionSeeder extends Seeder
             //     'presences' => ['index'],
             // ],
             'Super Admin' => [
-                'questions' => ['index', 'create', 'update'],
+                'students' => ['index', 'create', 'update'],
                 // 'companies' => ['index', 'create', 'read', 'update'],
                 // 'payroll_components' => ['update'],
                 // 'users' => ['index', 'create', 'read', 'update'],

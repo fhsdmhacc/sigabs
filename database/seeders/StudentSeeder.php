@@ -16,8 +16,8 @@ class StudentSeeder extends Seeder
     {
         Student::create([
             'uuid' => Str::uuid(),
-            'name' => 'Fulan',
-            'identification_number' => 123,
+            'name' => 'Fulan Ahmad',
+            'identification_number' => 12345678,
             'birthday' => '2023-12-20',
             'gender' => 'L',
             'class' => 'X-TKJ',

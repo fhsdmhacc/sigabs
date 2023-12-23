@@ -29,6 +29,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 
     @livewireStyles
 
@@ -64,6 +65,15 @@
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script>
+        FilePond.registerPlugin(
+            FilePondPluginFileValidateType,
+            FilePondPluginFileValidateSize
+        );
+    </script>
 </body>
 
 </html>

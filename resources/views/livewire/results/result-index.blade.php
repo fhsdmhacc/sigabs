@@ -11,47 +11,51 @@
                     {{ __('Cari') }}
                 </button>
             </div>
-
-            <x-anchor :href="route('questions.create')"
-                class="ml-auto flex items-center gap-x-1 rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-opacity-80">
-                <svg class="-ml-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path
-                        d="M10.75 6.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" />
-                </svg>
-                {{ __('Buat baru') }}
-            </x-anchor>
         </div>
     </header>
 
     <x-table>
-        @forelse ($questions as $question)
-            <x-table-column wire:key="{{ $question->uuid }}">
+        @forelse ($students as $student)
+            <x-table-column wire:key="{{ $student->uuid }}">
                 <x-slot:left-column>
                     <div class="text-sm font-medium leading-6 text-gray-900 truncate">
-                        {{ $question->name }}
+                        {{ __(':name (:gender)', [
+                            'name' => $student->name,
+                            'gender' => $student->gender,
+                        ]) }}
                     </div>
 
                     <div class="mt-1 text-xs leading-5 text-gray-500">
-                        {{-- {{ $question->company->name }} --}}
+                        {{ $student->class }}
                     </div>
                 </x-slot:left-column>
 
                 <x-slot:middle-column>
                     <div class="text-sm leading-6 text-gray-900">
-                        {{ __('Jumlah Karyawan') }}
+                        {{ __('Tipe Gaya Belajar') }}
                     </div>
 
-                    <div class="mt-1 text-xs leading-5 text-gray-500 truncate">
-                        {{ __(':count Karyawan', [
-                            // 'count' => Number::format($question->employees->count()),
-                        ]) }}
+                    <div class="mt-1 text-xs leading-5 text-gray-500">
+                        {{-- @if ($student->results->get(2)->total - $student->results->get(0)->total <= 4)
+                            @foreach ($student->results->sortByDesc('total') as $result)
+                                {{ $result->type->label }}
+                            @endforeach
+                        @elseif($student->results->get(2)->total - $student->results->get(1)->total <= 4)
+                            @foreach ($student->results->sortByDesc('total') as $result)
+                                {{ $result->type->label }}
+                            @endforeach
+                        @else
+                            @foreach ($student->results->sortByDesc('total') as $result)
+                                {{ $result->type->label }}
+                            @endforeach
+                        @endif --}}
                     </div>
                 </x-slot:middle-column>
 
                 <x-slot:right-column>
                     <div class="flex justify-end">
-                        @can('update questions')
-                            <x-anchor href="#"
+                        @can('update students')
+                            <x-anchor :href="route('students.edit', $student->uuid)"
                                 class="text-sm font-medium leading-6 text-primary-500 hover:text-secondary-500">
                                 {{ __('Ubah Detail') }}
                             </x-anchor>
@@ -60,7 +64,7 @@
 
                     <div class="mt-1 text-xs leading-5 text-gray-500 truncate">
                         {{ __(':created_at WIB', [
-                            'created_at' => \Carbon\Carbon::parse($question->created_at)->isoFormat('dddd, DD MMMM YYYY HH:mm'),
+                            'created_at' => \Carbon\Carbon::parse($student->created_at)->isoFormat('dddd, DD MMMM YYYY HH:mm'),
                         ]) }}
                         </span>
                     </div>
@@ -79,5 +83,5 @@
         @endforelse
     </x-table>
 
-    {{ $questions->links() }}
+    {{ $students->links() }}
 </main>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Student extends Model
 {
@@ -38,5 +39,13 @@ class Student extends Model
     public function getRouteKeyName(): string
     {
         return 'uuid';
+    }
+
+    /**
+     * Get the results for the student.
+     */
+    public function results(): HasMany
+    {
+        return $this->hasMany(Result::class);
     }
 }

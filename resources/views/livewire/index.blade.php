@@ -91,21 +91,49 @@
                         {{ __('Mulai sekarang') }}
                     </x-anchor>
 
-                    <x-anchor href="#" class="text-sm font-semibold leading-6 text-gray-900">
-                        {{ __('Lihat hasil') }}
+                    <button type="button"
+                        x-on:click="document.getElementById('faq').scrollIntoView({behavior: 'smooth'});"
+                        class="text-sm font-semibold leading-6 text-gray-900">
+                        {{ __('FAQ') }}
                         <span aria-hidden="true">→</span>
-                    </x-anchor>
+                    </button>
                 </div>
             </div>
 
             <div class="mt-16 flow-root sm:mt-24">
                 <div
                     class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                    <img src="https://tailwindui.com/img/component-images/project-app-screenshot.png"
-                        alt="{{ __('App screenshot') }}" width="2432" height="1442"
-                        class="rounded-md shadow-2xl ring-1 ring-gray-900/10">
+                    <img src="{{ asset('images/image.png') }}" alt="{{ __('App screenshot') }}" width="2432"
+                        height="1442" class="rounded-md shadow-2xl ring-1 ring-gray-900/10">
                 </div>
             </div>
         </div>
+
+        <section id="faq" class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+            <div class="mx-auto max-w-2xl text-center">
+                <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">
+                    {{ __('Pertanyaan yang sering ditanyakan') }}
+                </h2>
+                <p class="mt-6 text-base leading-7 text-gray-600">
+                    {{ __('Punya pertanyaan lain dan tidak dapat jawaban yang Anda cari?, tanyakan kepada wali kelas Anda dengan cara menanyakan secara langsung.') }}
+                </p>
+            </div>
+            <div class="mt-20">
+                <dl class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:gap-x-10">
+                    @for ($i = 1; $i < 5; $i++)
+                        <div>
+                            <dt class="text-base font-semibold leading-7 text-gray-900">
+                                Lorem ipsum dolor sit amet consectetur.
+                            </dt>
+                            <dd class="mt-2 text-base leading-7 text-gray-600">
+                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, fugiat. Nisi
+                                laudantium
+                                optio fuga consequuntur nihil explicabo quaerat mollitia fugit.
+                            </dd>
+                        </div>
+                    @endfor
+                </dl>
+            </div>
+        </section>
     </x-pattern>
 </div>

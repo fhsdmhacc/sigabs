@@ -13,7 +13,25 @@
         <div class="mt-6 border-t border-gray-200 pt-6">
             <div class="grid grid-cols-1 gap-y-6 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div>
-                    <x-input :label="__('Pertanyaan')" wire:model="name" :placeholder="__('Masukkan pertanyaan')" required />
+                    <x-input :label="__('Nama Lengkap')" wire:model="name" :placeholder="__('Masukkan nama lengkap siswa')" required />
+                </div>
+
+                <div>
+                    <x-input type="number" :label="__('Nomor Induk Siswa')" wire:model="identification_number" :placeholder="__('Masukkan nomor induk siswa')"
+                        required />
+                </div>
+
+                <div>
+                    <x-flatpickr :label="__('Tanggal Lahir')" wire:model="birthday" :placeholder="__('Masukkan tanggal lahir siswa')" required />
+                </div>
+
+                <div>
+                    <x-select.styled :label="__('Jenis Kelamin')" wire:model="gender" :options="[['label' => 'Laki-laki', 'value' => 'L'], ['label' => 'Perempuan', 'value' => 'P']]"
+                        select="label:label|value:value" />
+                </div>
+
+                <div>
+                    <x-input :label="__('Kelas')" wire:model="class" :placeholder="__('Masukkan kelas siswa')" required />
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Result extends Model
 {
@@ -16,7 +17,16 @@ class Result extends Model
      */
     protected $fillable = [
         'student_id',
-        'question_id',
-        'value',
+        'type_id',
+        'total',
+        'percentage',
     ];
+
+    /**
+     * Get the type that owns the result.
+     */
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

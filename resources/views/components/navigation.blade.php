@@ -27,12 +27,20 @@
 
                 <div class="space-y-6 px-4 py-6 mt-2">
                     <div class="flow-root h-full">
-                        <x-anchor :href="route('questions.index')" x-data="{ isActive: {{ request()->routeIs('questions.*') ? 'true' : 'false' }} }" class="-m-2 block p-2 font-medium"
+                        <x-anchor :href="route('students.index')" x-data="{ isActive: {{ request()->routeIs('students.*') ? 'true' : 'false' }} }" class="-m-2 block p-2 font-medium"
                             x-bind:class="isActive ? 'text-primary' : 'text-gray-900'">
                             <span x-bind:class="isActive && 'bg-primary'"
                                 class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
                                 aria-hidden="true"></span>
-                            {{ __('Pertanyaan') }}
+                            {{ __('Siswa') }}
+                        </x-anchor>
+
+                        <x-anchor :href="route('results.index')" x-data="{ isActive: {{ request()->routeIs('results.*') ? 'true' : 'false' }} }" class="-m-2 block p-2 font-medium"
+                            x-bind:class="isActive ? 'text-primary' : 'text-gray-900'">
+                            <span x-bind:class="isActive && 'bg-primary'"
+                                class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                aria-hidden="true"></span>
+                            {{ __('Hasil') }}
                         </x-anchor>
                     </div>
                 </div>
@@ -62,13 +70,22 @@
                     <div class="hidden h-full lg:flex">
                         <div class="inset-x-0 bottom-0 px-4">
                             <div class="flex h-full justify-center space-x-8">
-                                <x-anchor :href="route('questions.index')" x-data="{ isActive: {{ request()->routeIs('questions.*') ? 'true' : 'false' }} }"
+                                <x-anchor :href="route('students.index')" x-data="{ isActive: {{ request()->routeIs('students.*') ? 'true' : 'false' }} }"
                                     x-bind:class="isActive && 'text-primary'"
                                     class="relative z-10 flex items-center justify-center font-medium text-sm">
                                     <span x-bind:class="isActive && 'bg-primary'"
                                         class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
                                         aria-hidden="true"></span>
-                                    {{ __('Pertanyaan') }}
+                                    {{ __('Siswa') }}
+                                </x-anchor>
+
+                                <x-anchor :href="route('results.index')" x-data="{ isActive: {{ request()->routeIs('results.*') ? 'true' : 'false' }} }"
+                                    x-bind:class="isActive && 'text-primary'"
+                                    class="relative z-10 flex items-center justify-center font-medium text-sm">
+                                    <span x-bind:class="isActive && 'bg-primary'"
+                                        class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                        aria-hidden="true"></span>
+                                    {{ __('Hasil') }}
                                 </x-anchor>
                             </div>
                         </div>

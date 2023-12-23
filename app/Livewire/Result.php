@@ -15,33 +15,31 @@ class Result extends Component
 
     public $student;
 
-    public $types;
-
-    public $styles;
+    public $results;
 
     public function mount(Student $student)
     {
         $this->id = $student->id;
 
-        $this->student = $student->load([
-            'results' => function ($query) {
-                $query->selectRaw('count(value) as values_count, student_id, value')
-                    ->groupBy('value')
-                    ->orderByDesc('values_count');
-            }
-        ]);
+        $this->student = $student;
 
-        $result = $this->student->results->take(3);
+        $outcomes = Student::where('id', $student->id)
+                            ->with([
+                                'results' => function ($query) {
+                                    $query->orderBy('total');
+                                }
+                            ])
+                            ->first();
 
-        $this->types = Type::query()->get();
-
-        if ($result->get(0)->values_count - $result->get(2)->values_count <= 4) {
-            $this->styles = $this->types->whereIn('name', [$result->get(0)->value, $result->get(1)->value, $result->get(2)->value]);
-        } elseif ($result->get(0)->values_count - $result->get(1)->values_count <= 4) {
-            $this->styles = $this->types->whereIn('name', [$result->get(0)->value, $result->get(1)->value]);
-        } else {
-            $this->styles = $this->types->whereIn('name', [$result->get(0)->value]);
+        if ($outcomes->results->get(2)->total - $outcomes->results->get(0)->total <= 4) {
+            return $this->results = $outcomes->results->splice(0);
         }
+
+        if ($outcomes->results->get(2)->total - $outcomes->results->get(1)->total <= 4) {
+            return $this->results = $outcomes->results->splice(1);
+        }
+
+        return $this->results = $outcomes->results->splice(2);
     }
 
     public function render()

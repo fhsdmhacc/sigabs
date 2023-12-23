@@ -5,7 +5,7 @@
     </div>
 
     <div
-        class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 xl:gap-x-24 lg:items-center lg:h-full">
+        class="mx-auto max-w-2xl px-4 py-16 sm:px-6 2xl:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 xl:gap-x-24 lg:items-center lg:h-full">
         <form class="lg:col-start-2" wire:submit="save">
             <h1 class="text-sm font-medium text-primary">
                 {{ __('Langkah ke 1 dari 3') }}

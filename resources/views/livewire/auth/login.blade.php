@@ -46,7 +46,7 @@
                         {{ __('Belum punya akun?') }}
 
                         <a href="#" class="text-primary hover:opacity-80" target="_blank">
-                            {{ __('Coba demo aplikasi gratis') }}
+                            {{ __('Hubungi administrator') }}
                         </a>
                     </p>
                 </form>
