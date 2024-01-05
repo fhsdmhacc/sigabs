@@ -115,25 +115,36 @@
                     {{ __('Pertanyaan yang sering ditanyakan') }}
                 </h2>
                 <p class="mt-6 text-base leading-7 text-gray-600">
-                    {{ __('Punya pertanyaan lain dan tidak dapat jawaban yang Anda cari?, tanyakan kepada wali kelas Anda dengan cara menanyakan secara langsung.') }}
+                    {{ __('Punya pertanyaan lain dan tidak dapat jawaban yang Anda cari? silakan tanyakan kepada wali kelas Anda dengan cara menanyakan secara langsung.') }}
                 </p>
             </div>
             <div class="mt-20">
                 <dl class="space-y-16 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-16 sm:space-y-0 lg:gap-x-10">
-                    @for ($i = 1; $i < 5; $i++)
-                        <div>
+                    @foreach ($faqs as $faq)
+                        <div wire:key="{{ $faq->uuid }}">
                             <dt class="text-base font-semibold leading-7 text-gray-900">
-                                Lorem ipsum dolor sit amet consectetur.
+                                {{ $faq->question }}
                             </dt>
                             <dd class="mt-2 text-base leading-7 text-gray-600">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, fugiat. Nisi
-                                laudantium
-                                optio fuga consequuntur nihil explicabo quaerat mollitia fugit.
+                                {{ $faq->answer }}
                             </dd>
                         </div>
-                    @endfor
+                    @endforeach
                 </dl>
             </div>
         </section>
+
+        <footer class="bg-white">
+            <div class="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+                <div class="mt-8 md:order-1 md:mt-0">
+                    <p class="text-center text-xs leading-5 text-gray-500">
+                        &copy;
+                        {{ __(':year SMK Fadilah. Seluruh hak cipta. Dibuat dengan ❤ dan sepenuh hati, Ya sepenuh hati.', [
+                            'year' => now()->format('Y'),
+                        ]) }}
+                    </p>
+                </div>
+            </div>
+        </footer>
     </x-pattern>
 </div>

@@ -31,11 +31,7 @@
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/airbnb.css">
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
 
-    @livewireStyles
-
-    @tallStackUiScript
-
-    @tallStackUiStyle
+    <tallstackui:script />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -57,11 +53,7 @@
 
     <x-toast />
 
-    @livewire('search-palette')
-
     @livewire('offline-state')
-
-    @livewireScripts
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>

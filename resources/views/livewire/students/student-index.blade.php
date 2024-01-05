@@ -20,6 +20,8 @@
                         {{ __('Unggah') }}
                     </x-anchor>
                 @endcan
+
+                <x-search-palette />
             </div>
 
             <x-anchor :href="route('students.create')"

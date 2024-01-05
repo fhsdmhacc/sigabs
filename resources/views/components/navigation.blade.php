@@ -35,12 +35,36 @@
                             {{ __('Siswa') }}
                         </x-anchor>
 
+                        <x-anchor href="#" x-data="{ isActive: {{ request()->routeIs('#') ? 'true' : 'false' }} }" class="-m-2 block p-2 font-medium"
+                            x-bind:class="isActive ? 'text-primary' : 'text-gray-900'">
+                            <span x-bind:class="isActive && 'bg-primary'"
+                                class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                aria-hidden="true"></span>
+                            {{ __('Guru') }}
+                        </x-anchor>
+
+                        <x-anchor href="#" x-data="{ isActive: {{ request()->routeIs('#') ? 'true' : 'false' }} }" class="-m-2 block p-2 font-medium"
+                            x-bind:class="isActive ? 'text-primary' : 'text-gray-900'">
+                            <span x-bind:class="isActive && 'bg-primary'"
+                                class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                aria-hidden="true"></span>
+                            {{ __('Kelas') }}
+                        </x-anchor>
+
                         <x-anchor :href="route('results.index')" x-data="{ isActive: {{ request()->routeIs('results.*') ? 'true' : 'false' }} }" class="-m-2 block p-2 font-medium"
                             x-bind:class="isActive ? 'text-primary' : 'text-gray-900'">
                             <span x-bind:class="isActive && 'bg-primary'"
                                 class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
                                 aria-hidden="true"></span>
                             {{ __('Hasil') }}
+                        </x-anchor>
+
+                        <x-anchor href="#" x-data="{ isActive: {{ request()->routeIs('#') ? 'true' : 'false' }} }" class="-m-2 block p-2 font-medium"
+                            x-bind:class="isActive ? 'text-primary' : 'text-gray-900'">
+                            <span x-bind:class="isActive && 'bg-primary'"
+                                class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                aria-hidden="true"></span>
+                            {{ __('Pengguna') }}
                         </x-anchor>
                     </div>
                 </div>
@@ -79,6 +103,24 @@
                                     {{ __('Siswa') }}
                                 </x-anchor>
 
+                                <x-anchor href="#" x-data="{ isActive: {{ request()->routeIs('#') ? 'true' : 'false' }} }"
+                                    x-bind:class="isActive && 'text-primary'"
+                                    class="relative z-10 flex items-center justify-center font-medium text-sm">
+                                    <span x-bind:class="isActive && 'bg-primary'"
+                                        class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                        aria-hidden="true"></span>
+                                    {{ __('Guru') }}
+                                </x-anchor>
+
+                                <x-anchor href="#" x-data="{ isActive: {{ request()->routeIs('#') ? 'true' : 'false' }} }"
+                                    x-bind:class="isActive && 'text-primary'"
+                                    class="relative z-10 flex items-center justify-center font-medium text-sm">
+                                    <span x-bind:class="isActive && 'bg-primary'"
+                                        class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                        aria-hidden="true"></span>
+                                    {{ __('Kelas') }}
+                                </x-anchor>
+
                                 <x-anchor :href="route('results.index')" x-data="{ isActive: {{ request()->routeIs('results.*') ? 'true' : 'false' }} }"
                                     x-bind:class="isActive && 'text-primary'"
                                     class="relative z-10 flex items-center justify-center font-medium text-sm">
@@ -86,6 +128,15 @@
                                         class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
                                         aria-hidden="true"></span>
                                     {{ __('Hasil') }}
+                                </x-anchor>
+
+                                <x-anchor href="#" x-data="{ isActive: {{ request()->routeIs('#') ? 'true' : 'false' }} }"
+                                    x-bind:class="isActive && 'text-primary'"
+                                    class="relative z-10 flex items-center justify-center font-medium text-sm">
+                                    <span x-bind:class="isActive && 'bg-primary'"
+                                        class="absolute inset-x-0 bottom-0 h-0.5 transition-colors duration-200 ease-out mt-5 translate-y-px transform"
+                                        aria-hidden="true"></span>
+                                    {{ __('Pengguna') }}
                                 </x-anchor>
                             </div>
                         </div>
@@ -123,7 +174,7 @@
 
                     <div class="flex flex-1 items-center justify-end h-full">
                         <div class="ml-4 flow-root lg:ml-8 h-full">
-                            <x-anchor href="#" x-data="{ isActive: {{ request()->routeIs('#') ? 'true' : 'false' }} }"
+                            <x-anchor :href="route('accounts.index')" x-data="{ isActive: {{ request()->routeIs('accounts.*') ? 'true' : 'false' }} }"
                                 class="relative z-10 flex items-center justify-center h-full"
                                 x-bind:class="isActive ? 'text-primary' : 'text-gray-400'">
                                 <span x-bind:class="isActive && 'bg-primary'"

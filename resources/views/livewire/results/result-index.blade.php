@@ -10,6 +10,8 @@
                 <button type="button" x-on:click="isSearchPaletteOpen = !isSearchPaletteOpen" class="text-gray-700">
                     {{ __('Cari') }}
                 </button>
+
+                <x-search-palette />
             </div>
         </div>
     </header>

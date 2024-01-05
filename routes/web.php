@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Accounts\AccountIndex;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\ResetPassword;
@@ -86,6 +87,17 @@ Route::middleware([
         ], function () {
             Route::get('/', ResultIndex::class)
             ->name('index');
+        });
+
+        Route::group([
+            'prefix'=>'accounts',
+            'as'=>'accounts.'
+        ], function () {
+            Route::get('/', AccountIndex::class)
+                ->name('index');
+
+            // Route::get('/edit-password', EditAccountPassword::class)
+            //     ->name('edit_password');
         });
     });
 });

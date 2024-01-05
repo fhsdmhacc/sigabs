@@ -1,4 +1,4 @@
-<main class="relative lg:h-full" x-data="{ isSlideOverShow: false }">
+<main class="relative lg:h-full" x-data="{ isSlideOverShow: true, selectedTab: '1' }">
     <div class="h-80 overflow-hidden lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-12">
         <img src="{{ asset('images/avery-evans-7rRH23jkIwo-unsplash.jpg') }}" alt="image"
             class="h-full w-full object-cover object-center">
@@ -141,35 +141,295 @@
 
                             <div class="border-b border-gray-200">
                                 <div class="px-6">
-                                    <!-- Tab component -->
                                     <nav class="-mb-px flex space-x-6">
-                                        <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-                                        <a href="#"
-                                            class="border-indigo-500 text-indigo-600 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium">
+                                        <button type="button" x-on:click="selectedTab = '1'"
+                                            x-bind:class="selectedTab === '1' ? 'border-primary text-primary' :
+                                                'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
+                                            class="whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium">
                                             {{ __('Visual') }}
-                                        </a>
+                                        </button>
 
-                                        <a href="#"
-                                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium">
+                                        <button type="button" x-on:click="selectedTab = '2'"
+                                            x-bind:class="selectedTab === '2' ? 'border-primary text-primary' :
+                                                'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
+                                            class="whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium">
                                             {{ __('Auditori') }}
-                                        </a>
+                                        </button>
 
-                                        <a href="#"
-                                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium">
+                                        <button type="button" x-on:click="selectedTab = '3'"
+                                            x-bind:class="selectedTab === '3' ? 'border-primary text-primary' :
+                                                'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
+                                            class="whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium">
                                             {{ __('Kinestetik') }}
-                                        </a>
+                                        </button>
                                     </nav>
                                 </div>
                             </div>
 
                             <ul role="list" class="flex-1 divide-y divide-gray-200 overflow-y-auto">
-                                <li>
-                                    <div class="group relative flex items-center px-5 py-6">
-                                        //
+                                <li x-show="selectedTab === '1'">
+                                    <div class="px-5 py-6">
+                                        <div>
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Visual') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <p>
+                                                    {{ __('Siswa bergaya belajar visual, seperti namanya, belajar paling baik dengan menggunakan mata mereka. Mereka lebih suka melihat bagaimana melakukan sesuatu daripada berdiskusi. Ini adalah gaya belajar pendidikan konvensial, secara tradisional diarahkan. Tidak mengherankan, karena 60% orang percaya dirinya sebagai pembelajar visual, dan ini adalah salah satu gaya yang lebih mudah untuk mengakomodasi pembelajaran dalam skala besar.') }}
+                                                </p>
+
+                                                <p class="mt-4">
+                                                    {{ __('Gaya belajar visual, berarti siswa belajar dengan melihat dan mencermati.') }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8 border-t border-gray-200 pt-8">
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Siswa pada umumnya:') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <ul role="list">
+                                                    <li>
+                                                        {{ __('Membuat catatan rinci daripada terlibat diskusi.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Cenderung duduk di depan agar dapat melihat dengan jelas.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Mendapatkan manfaat dari ilustrasi dan presentasi, dan terutama yang berwarna.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Memberikan komentar seperti, "Bagaimana kamu melihat situasinya?", "Apa yang kamu lihat dan dapat menghentikanmu agar fokus?", "Apakah kamu melihat apa yang aku tunjukkan padamu?".') }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8 border-t border-gray-200 pt-8">
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Saran memaksimalkan pembelajaran') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <ul role="list">
+                                                    <li>
+                                                        {{ __('Gunakan peta, garis waktu dan gambar.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Buatlah garis besar/kerangka hasil baca/belajar! ini dapat membuat peta pikiran atau Mindjet software.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Buat catatan terkait hasil membaca, menonton video, dll.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Gunakan warna-kode. Garis bawahi kata-kata kunci dengan bolpen warna.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Buat diagram bila memungkinkan (diagram venn, diagram kalimat).') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Gunakan flashcards (kartu warna atau penanda).') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Gunakan berbagai jenis bagan (pai, bar, garis).') }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
 
-                                <!-- More people... -->
+                                <li x-show="selectedTab === '2'">
+                                    <div class="px-5 py-6">
+                                        <div>
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Auditori') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <p>
+                                                    {{ __('Siswa bergaya belajar auditori memantapkan pemahaman ketika mereka mendengar informasi. Mereka biasanya mengikuti arah dengan baik, berkonsentrasi lebih baik dengan musik atau gerakan di latar belakang dan mengulangi semuanya kembali untuk memastikan mereka mendapatkan informasi dengan pemahaman baik.') }}
+                                                </p>
+
+                                                <p class="mt-4">
+                                                    {{ __('Gaya belajar auditori, berarti siswa belajar dengan mendengar dan menyimak secara intensif.') }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8 border-t border-gray-200 pt-8">
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Siswa pada umumnya:') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <ul role="list">
+                                                    <li>
+                                                        {{ __('Menikmati diskusi dan membicarakan hal-hal melalui dan mendengarkan orang lain.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Mendapatkan pengetahuan dengan membaca keras.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Bergumam atau berbicara kepada diri sendiri.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Memberikan komentar seperti, "Aku mendengarmu dengan jelas", "Saya ingin Anda mendengarkan", "Ini terdengar bagus".') }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8 border-t border-gray-200 pt-8">
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Saran memaksimalkan pembelajaran') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <ul role="list">
+                                                    <li>
+                                                        {{ __('Gunakan asosiasi kata untuk fakta/tanggal.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Dengarkan podcast/rekaman ceramah.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Gunakan video jika waktunya tepat.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Bahas materi pelajaran dengan menyuarakannya.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Dengarkan buku audio.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Baca catatan dengan suara keras dan rekam.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Ulangi semua materi belajar dengan menyuarakannya bila memungkinkan.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Belajar dalam kelompok dengan cara diskusi.') }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li x-show="selectedTab === '3'">
+                                    <div class="px-5 py-6">
+                                        <div>
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Kinestetik') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <p>
+                                                    {{ __('Siswa bergaya belajar kinestetik dapat belajar paling baik dengan berinteraksi atau mengalami hal-hal di sekitarnya. Mereka mendapat manfaat dari keterlibatan langsung, daripada mendengarkan ceramah atau membaca dari sebuah buku. Mereka suka melakukan hal-hal dan menggunakan tubuh mereka untuk mengingat fakta, seperti "memanggil" (dialing) nomor telepon pada telepon genggam mereka.') }}
+                                                </p>
+
+                                                <p class="mt-4">
+                                                    {{ __('Gaya belajar kinestetik, berarti siswa belajar dengan menyentuh dan melakukan.') }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8 border-t border-gray-200 pt-8">
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Siswa pada umumnya:') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <ul role="list">
+                                                    <li>
+                                                        {{ __('Perlu banyak istirahat dan ingin banyak bergerak.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Berbicara dengan menggunakan tangan dan gerakan/gestur.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Ingat apa yang telah dilakukan, tetapi mengalami kesulitan dengan apa yang dikatakan atau dilihat.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Belajar dengan melakukan aktivitas.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Memberikan komentar seperti, "Bagaimana perasaanmu tentang hal ini?", "Mari maju bersama", "Apakah Anda paham dengan apa yang saya katakan?".') }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8 border-t border-gray-200 pt-8">
+                                            <h2 class="text-sm font-medium text-gray-900">
+                                                {{ __('Saran memaksimalkan pembelajaran') }}
+                                            </h2>
+
+                                            <div class="prose prose-sm mt-4 text-gray-500">
+                                                <ul role="list">
+                                                    <li>
+                                                        {{ __('Sering-seringlah (jeda) istirahat.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Melakukan kegiatan yang dilakukan secara langsung, seperti eksperimen dan peragaan sejarah.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Membuat model suatu topik pembelajaran.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Mengikuti berbagai kelas, seperti menari, kickboxing, atau ragam olahraga lainnya.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Menggunakan buku-buku petualangan/tindakan.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Melibatkan bermain peran dan praktikan kegiatan belajar.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Studi dalam kelompok dengan sering istirahat.') }}
+                                                    </li>
+
+                                                    <li>
+                                                        {{ __('Menggunakan kartu flash untuk memori.') }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
