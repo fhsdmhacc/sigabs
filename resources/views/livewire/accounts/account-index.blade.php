@@ -54,7 +54,7 @@
                             <div class="text-gray-900">
                                 {{ __('********') }}
                             </div>
-                            <x-anchor href="#" class="font-semibold text-primary hover:text-opacity-80">
+                            <x-anchor :href="route('accounts.edit_password')" class="font-semibold text-primary hover:text-opacity-80">
                                 {{ __('Ubah') }}
                             </x-anchor>
                         </dd>

@@ -19,18 +19,10 @@ class RoleAndPermissionSeeder extends Seeder
 
         // create permissions
         $permissions = [
+            'results' => ['index', 'read'],
             'students' => ['index', 'create', 'update'],
-            // 'payroll_components' => ['update'],
-            // 'users' => ['index', 'create', 'read', 'update'],
-            // 'locations' => ['index', 'create', 'read', 'update'],
-            // 'positions' => ['index', 'create', 'update'],
-            // 'divisions' => ['index', 'create', 'update'],
-            // 'employees' => ['index', 'create', 'read', 'update'],
-            // 'presences' => ['index'],
-            // 'overtimes' => ['index'],
-            // 'timeoffs' => ['index'],
-            // 'payrolls' => ['index', 'create'],
-            // 'queues' => ['index'],
+            'classrooms' => ['index', 'create', 'update'],
+            'users' => ['index', 'create', 'update'],
         ];
 
         foreach ($permissions as $permission => $methods) {
@@ -40,39 +32,15 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         $roles = [
-            'Teacher' => [],
-            // 'Human Resource Development' => [
-            //     'locations' => ['index', 'create', 'read', 'update', 'delete', 'upload'],
-            //     'positions' => ['index', 'create', 'read', 'update', 'delete', 'upload'],
-            //     'divisions' => ['index', 'create', 'read', 'update', 'delete', 'upload'],
-            //     'employees' => ['index', 'create', 'read', 'update', 'delete', 'upload'],
-            //     'presences' => ['index'],
-            //     'overtimes' => ['index'],
-            //     'timeoffs' => ['index'],
-            //     'payrolls' => ['index', 'create', 'read', 'update', 'delete', 'upload'],
-            // ],
-            // 'Supervisor' => [
-            //     'presences' => ['index'],
-            //     'overtimes' => ['index'],
-            //     'timeoffs' => ['index'],
-            // ],
-            // 'Employee' => [
-            //     'presences' => ['index'],
-            // ],
-            'Super Admin' => [
+            'Teacher' => [
+                'results' => ['index', 'read'],
                 'students' => ['index', 'create', 'update'],
-                // 'companies' => ['index', 'create', 'read', 'update'],
-                // 'payroll_components' => ['update'],
-                // 'users' => ['index', 'create', 'read', 'update'],
-                // 'locations' => ['index', 'create', 'read', 'update'],
-                // 'positions' => ['index', 'create', 'update'],
-                // 'divisions' => ['index', 'create', 'update'],
-                // 'employees' => ['index', 'create', 'read', 'update'],
-                // 'presences' => ['index'],
-                // 'overtimes' => ['index'],
-                // 'timeoffs' => ['index'],
-                // 'payrolls' => ['index', 'create'],
-                // 'queues' => ['index'],
+            ],
+            'Super Admin' => [
+                'results' => ['index', 'read'],
+                'students' => ['index', 'create', 'update'],
+                'classrooms' => ['index', 'create', 'update'],
+                'users' => ['index', 'create', 'update'],
             ]
         ];
 

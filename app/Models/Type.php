@@ -17,5 +17,6 @@ class Type extends Model
     protected $fillable = [
         'value',
         'label',
+        'variable',
     ];
 }

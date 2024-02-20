@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Student;
+use App\Models\Type;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
@@ -15,6 +16,8 @@ class Result extends Component
 
     public $student;
 
+    public $types;
+
     public $results;
 
     public function mount(Student $student)
@@ -23,23 +26,36 @@ class Result extends Component
 
         $this->student = $student;
 
-        $outcomes = Student::where('id', $student->id)
-                            ->with([
-                                'results' => function ($query) {
-                                    $query->orderBy('total');
-                                }
-                            ])
-                            ->first();
+        $this->types = Type::get();
 
-        if ($outcomes->results->get(2)->total - $outcomes->results->get(0)->total <= 4) {
-            return $this->results = $outcomes->results->splice(0);
+        $selected = [
+            [
+                'value' => $student->result->visual,
+                'variable' => 'Visual'
+            ],
+            [
+                'value' => $student->result->auditory,
+                'variable' => 'Auditori'
+            ],
+            [
+                'value' => $student->result->kinesthetic,
+                'variable' => 'Kinestetik'
+            ]
+        ];
+
+        usort($selected, function ($a, $b) {
+            return $a['value'] - $b['value'];
+        });
+
+        if ($selected[2]['value'] - $selected[0]['value'] <= 4) {
+            return $this->results = array_slice(array_reverse($selected), 0, 3);
         }
 
-        if ($outcomes->results->get(2)->total - $outcomes->results->get(1)->total <= 4) {
-            return $this->results = $outcomes->results->splice(1);
+        if ($selected[2]['value'] - $selected[1]['value'] <= 4) {
+            return $this->results = array_slice(array_reverse($selected), 0, 2);
         }
 
-        return $this->results = $outcomes->results->splice(2);
+        return $this->results = array_slice(array_reverse($selected), 0, 1);
     }
 
     public function render()

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Students;
 
+use App\Models\Classroom;
 use App\Models\Student;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\Rule;
@@ -9,20 +10,18 @@ use Livewire\Component;
 
 class EditStudent extends Component
 {
-    public string $title = 'Buat Siswa Baru';
+    public string $title = 'Ubah Siswa';
 
-    // public string $permission = 'create locations';
+    public string $permission = 'update students';
 
     #[Locked]
     public $id;
-
-    public $student;
 
     #[Rule('required|string|max:250')]
     public string $name = '';
 
     #[Rule('required|integer|numeric')]
-    public string $identification_number = '';
+    public int $nis;
 
     #[Rule('required|date|date_format:Y-m-d')]
     public string $birthday = '';
@@ -31,39 +30,41 @@ class EditStudent extends Component
     public string $gender = '';
 
     #[Rule('required|string|max:250')]
-    public string $class = '';
+    public string $classroom_id = '';
 
     public function mount(Student $student)
     {
-        // $this->authorize($this->permission);
+        $this->authorize($this->permission);
 
         $this->id = $student->id;
 
         $this->name = $student->name;
 
-        $this->identification_number = $student->identification_number;
+        $this->nis = $student->nis;
 
         $this->birthday = $student->birthday->format('Y-m-d');
 
         $this->gender = $student->gender;
 
-        $this->class = $student->class;
+        $this->classroom_id = $student->classroom_id;
     }
 
     public function save()
     {
-        // $this->authorize($this->permission);
+        $this->authorize($this->permission);
 
         $this->validate();
+
+        $classroom = Classroom::findOrFail($this->classroom_id);
 
         $student = Student::findOrFail($this->id);
 
         $student->update([
+            'classroom_id' => $classroom->id,
             'name' => $this->name,
-            'identification_number' => $this->identification_number,
+            'nis' => $this->nis,
             'birthday' => $this->birthday,
             'gender' => $this->gender,
-            'class' => $this->class,
         ]);
 
         $this->redirect(route('students.index'), navigate: true);

@@ -8,7 +8,7 @@
         <div x-show="isSearchPaletteOpen" x-transition:enter="ease-out duration-300"
             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95" @click.away="isSearchPaletteOpen = false"
+            x-transition:leave-end="opacity-0 scale-95" x-on:click.outside="isSearchPaletteOpen = false"
             class="mx-auto max-w-xl transform divide-y divide-gray-100 overflow-hidden rounded-xl bg-white shadow-2xl ring-1 ring-black ring-opacity-5 transition-all">
             <div class="relative">
                 <svg class="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20"

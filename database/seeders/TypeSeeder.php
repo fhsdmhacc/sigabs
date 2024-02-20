@@ -17,16 +17,19 @@ class TypeSeeder extends Seeder
         Type::create([
             'value' => 'A',
             'label' => 'Visual',
+            'variable' => 'visual',
         ]);
 
         Type::create([
             'value' => 'B',
             'label' => 'Auditori',
+            'variable' => 'auditory',
         ]);
 
         Type::create([
             'value' => 'C',
             'label' => 'Kinestetik',
+            'variable' => 'kinesthetic',
         ]);
     }
 }

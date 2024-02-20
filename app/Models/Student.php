@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,11 +19,11 @@ class Student extends Model
      */
     protected $fillable = [
         'uuid',
+        'classroom_id',
         'name',
-        'identification_number',
+        'nis',
         'birthday',
         'gender',
-        'class',
     ];
 
     /**
@@ -42,10 +44,18 @@ class Student extends Model
     }
 
     /**
-     * Get the results for the student.
+     * Get the classroom that owns the student.
      */
-    public function results(): HasMany
+    public function classroom(): BelongsTo
     {
-        return $this->hasMany(Result::class);
+        return $this->belongsTo(Classroom::class);
+    }
+
+    /**
+     * Get the result associated with the student.
+     */
+    public function result(): HasOne
+    {
+        return $this->hasOne(Result::class);
     }
 }

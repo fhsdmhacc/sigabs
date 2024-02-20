@@ -21,7 +21,7 @@
 
             <div class="mt-16 space-y-6">
                 <div>
-                    <x-input :label="__('Nomor Induk Siswa')" wire:model="identification_number" :placeholder="__('Masukkan NIS Anda')" inputmode="numeric"
+                    <x-input :label="__('Nomor Induk Siswa')" wire:model="nis" :placeholder="__('Masukkan NIS Anda')" autocomplete="off" inputmode="numeric"
                         required />
                 </div>
 
@@ -30,8 +30,15 @@
                 </div>
 
                 <div>
-                    <x-select.styled :label="__('Kelas')" wire:model="class" :options="$classes"
-                        select="label:label|value:value" searchable />
+                    <x-select.styled :label="__('Kelas')" wire:model="classroom_id" :request="[
+                        'url' => route('api.classrooms'),
+                        'method' => 'post',
+                    ]" :placeholders="[
+                        'default' => 'Pilih salah satu',
+                        'search' => 'Ketikkan sesuatu untuk mencari',
+                        'empty' => 'Tidak ditemukan data apapun',
+                    ]"
+                        select="label:name|value:id" />
                 </div>
             </div>
 

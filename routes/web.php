@@ -1,18 +1,26 @@
 <?php
 
 use App\Livewire\Accounts\AccountIndex;
+use App\Livewire\Accounts\EditAccountPassword;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\ResetPassword;
+use App\Livewire\Classrooms\ClassroomIndex;
+use App\Livewire\Classrooms\CreateClassroom;
+use App\Livewire\Classrooms\EditClassroom;
 use App\Livewire\Home;
 use App\Livewire\Index;
 use App\Livewire\Recognize;
 use App\Livewire\Result;
 use App\Livewire\Results\ResultIndex;
+use App\Livewire\Results\ShowResult;
 use App\Livewire\Students\CreateStudent;
 use App\Livewire\Students\EditStudent;
 use App\Livewire\Students\StudentIndex;
 use App\Livewire\Students\StudentUpload;
+use App\Livewire\Users\CreateUser;
+use App\Livewire\Users\EditUser;
+use App\Livewire\Users\UserIndex;
 use App\Livewire\Verification;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +73,17 @@ Route::middleware([
     ])
     ->group(function () {
         Route::group([
+            'prefix'=>'results',
+            'as'=>'results.'
+        ], function () {
+            Route::get('/', ResultIndex::class)
+                ->name('index');
+
+            Route::get('/{classroom}', ShowResult::class)
+                ->name('show');
+        });
+
+        Route::group([
             'prefix'=>'students',
             'as'=>'students.'
         ], function () {
@@ -82,11 +101,31 @@ Route::middleware([
         });
 
         Route::group([
-            'prefix'=>'results',
-            'as'=>'results.'
+            'prefix'=>'classrooms',
+            'as'=>'classrooms.'
         ], function () {
-            Route::get('/', ResultIndex::class)
-            ->name('index');
+            Route::get('/', ClassroomIndex::class)
+                ->name('index');
+
+            Route::get('create', CreateClassroom::class)
+                ->name('create');
+
+            Route::get('/{classroom}/edit', EditClassroom::class)
+                ->name('edit');
+        });
+
+        Route::group([
+            'prefix'=>'users',
+            'as'=>'users.'
+        ], function () {
+            Route::get('/', UserIndex::class)
+                ->name('index');
+
+            Route::get('create', CreateUser::class)
+                ->name('create');
+
+            Route::get('/{user}/edit', EditUser::class)
+                ->name('edit');
         });
 
         Route::group([
@@ -96,8 +135,8 @@ Route::middleware([
             Route::get('/', AccountIndex::class)
                 ->name('index');
 
-            // Route::get('/edit-password', EditAccountPassword::class)
-            //     ->name('edit_password');
+            Route::get('/edit-password', EditAccountPassword::class)
+                ->name('edit_password');
         });
     });
 });

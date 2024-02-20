@@ -17,10 +17,18 @@ class Result extends Model
      */
     protected $fillable = [
         'student_id',
-        'type_id',
-        'total',
-        'percentage',
+        'visual',
+        'auditory',
+        'kinesthetic',
     ];
+
+    /**
+     * Get the student that owns the result.
+     */
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
+    }
 
     /**
      * Get the type that owns the result.

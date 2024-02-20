@@ -13,25 +13,14 @@ class Verification extends Component
 
     public string $title = 'Verifikasi dirimu';
 
-    public $classes;
-
     #[Rule('required|integer|numeric')]
-    public $identification_number = '';
+    public int $nis;
 
     #[Rule('required|date|date_format:Y-m-d')]
     public $birthday = '';
 
-    #[Rule('required|string|max:250')]
-    public $class = '';
-
-    public function mount()
-    {
-        $this->classes = Student::distinct('class')->get([
-            'class as label',
-            'class as value'
-        ])
-        ->toArray();
-    }
+    #[Rule('required|max:250')]
+    public $classroom_id = '';
 
     public function save()
     {
@@ -39,13 +28,13 @@ class Verification extends Component
 
         $student = Student::firstWhere([
             [
-                'identification_number', $this->identification_number
+                'classroom_id', $this->classroom_id
+            ],
+            [
+                'nis', $this->nis
             ],
             [
                 'birthday', $this->birthday
-            ],
-            [
-                'class', $this->class
             ]
         ]);
 
@@ -53,7 +42,7 @@ class Verification extends Component
             return $this->redirect(route('recognize', $student->uuid), navigate: true);
         }
 
-        $this->toast()->error('Gagal!', 'Maaf, Anda tidak terdaftar sebagai siswa/i SMK Fadilah');
+        $this->toast()->error('Gagal!', 'Maaf, Anda tidak terdaftar sebagai siswa/i SMK Fadilah')->send();
     }
 
     public function render()

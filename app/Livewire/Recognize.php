@@ -133,19 +133,16 @@ class Recognize extends Component
                             ->orderByDesc('values_count')
                             ->get();
 
-            foreach ($answers as $answer) {
-                $type = Type::firstWhere('value', $answer->value);
-
-                Result::updateOrCreate(
-                    [
-                        'student_id' => $this->student->id,
-                        'type_id' => $type->id,
-                    ],
-                    [
-                        'total' => $answer->values_count
-                    ]
-                );
-            }
+            Result::updateOrCreate(
+                [
+                    'student_id' => $this->student->id,
+                ],
+                [
+                    'visual' => $answers->where('value', 'A')->first()->values_count ?? 0,
+                    'auditory' => $answers->where('value', 'B')->first()->values_count ?? 0,
+                    'kinesthetic' => $answers->where('value', 'C')->first()->values_count ?? 0,
+                ]
+            );
 
             return $this->redirect(route('result', $this->student->uuid), navigate: true);
         }

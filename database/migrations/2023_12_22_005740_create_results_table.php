@@ -13,8 +13,9 @@ return new class extends Migration {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('type_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->integer('total');
+            $table->integer('visual');
+            $table->integer('auditory');
+            $table->integer('kinesthetic');
             $table->timestamps();
         });
     }

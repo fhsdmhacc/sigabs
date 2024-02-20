@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Notifications\ResetPassword;
+use EloquentFilter\Filterable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -13,7 +15,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'is_password_changed',
     ];
 
     /**
@@ -45,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_password_changed' => 'boolean',
     ];
 
     /**
@@ -74,5 +78,13 @@ class User extends Authenticatable implements MustVerifyEmail
         ]);
 
         return $this->notify(new ResetPassword($url));
+    }
+
+    /**
+     * Get the session associated with the user.
+     */
+    public function session(): HasOne
+    {
+        return $this->hasOne(Session::class);
     }
 }

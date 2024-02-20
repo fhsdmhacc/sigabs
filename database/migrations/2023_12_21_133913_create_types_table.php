@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('value');
             $table->string('label');
+            $table->string('variable');
             $table->timestamps();
         });
     }

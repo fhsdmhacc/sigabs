@@ -1,4 +1,4 @@
-<main class="relative lg:h-full" x-data="{ isSlideOverShow: true, selectedTab: '1' }">
+<main class="relative lg:h-full" x-data="{ isSlideOverShow: false, selectedTab: '1' }">
     <div class="h-80 overflow-hidden lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-12">
         <img src="{{ asset('images/avery-evans-7rRH23jkIwo-unsplash.jpg') }}" alt="image"
             class="h-full w-full object-cover object-center">
@@ -26,25 +26,25 @@
 
                 <dd class="mt-2 text-primary flex items-center justify-between">
                     <p>
-                        {{ $student->identification_number }}
+                        {{ $student->nis }}
                     </p>
 
                     <p class="text-gray-900">
-                        {{ $student->class }}
+                        {{ $student->classroom->name }}
                     </p>
                 </dd>
             </dl>
 
             <dl class="space-y-6 border-t border-gray-200 mt-6 pt-6 text-sm font-medium text-gray-500">
-                @foreach ($student->results as $result)
-                    <div wire:key="{{ $result->id }}" class="flex justify-between">
+                @foreach ($types as $type)
+                    <div wire:key="{{ $type->id }}" class="flex justify-between">
                         <dt>
-                            {{ $result->type->label }}
+                            {{ $type->label }}
                         </dt>
 
                         <dd class="text-gray-900">
-                            {{ __(':values_count%', [
-                                'values_count' => number_format(($result->total * 100) / 30, 2),
+                            {{ __(':variable%', [
+                                'variable' => Number::format(($student->result->{$type->variable} * 100) / 30, 2),
                             ]) }}
                         </dd>
                     </div>
@@ -56,8 +56,8 @@
                     </dt>
 
                     <dd class="text-sm">
-                        @foreach ($results->sortByDesc('total') as $result)
-                            {{ $result->type->label }}
+                        @foreach ($results as $result)
+                            {{ $result['variable'] }}
                         @endforeach
                     </dd>
                 </div>
@@ -113,7 +113,7 @@
                         x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
                         x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
                         class="pointer-events-auto w-screen max-w-md" @click.away="isSlideOverShow = false">
-                        <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                        <div class="flex h-full flex-col bg-white shadow-xl">
                             <div class="p-6">
                                 <div class="flex items-start justify-between">
                                     <h2 class="text-base font-semibold leading-6 text-gray-900" id="slide-over-title">
@@ -122,7 +122,7 @@
 
                                     <div class="ml-3 flex h-7 items-center">
                                         <button type="button" x-on:click="isSlideOverShow = !isSlideOverShow"
-                                            class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-indigo-500">
+                                            class="relative rounded-md bg-white text-gray-400 hover:text-gray-500">
                                             <span class="absolute -inset-2.5"></span>
 
                                             <span class="sr-only">

@@ -7,14 +7,7 @@
         {{ $label }}
     </label>
 
-    <div class="mt-1 relative rounded-md shadow-sm w-full" wire:ignore x-data x-init="() => {
-        flatpickr($refs.input, {
-            altInput: true,
-            altFormat: 'j F Y',
-            dateFormat: 'Y-m-d',
-            locale: 'id',
-        });
-    }">
+    <div class="mt-1 relative rounded-md shadow-sm w-full" wire:ignore>
         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-400">
                 <path
@@ -25,9 +18,22 @@
             </svg>
         </div>
 
-        <input type="date" x-ref="input"
+        <input type="date" x-ref="input" id="{{ $attributes->whereStartsWith('wire:model')->first() }}"
+            x-data="{
+                value: @entangle($attributes->wire('model')),
+                instance: undefined,
+                init() {
+                    $watch('value', value => this.instance.setDate(value, false));
+                    this.instance = flatpickr(this.$refs.input, {
+                        altInput: true,
+                        altFormat: 'j F Y',
+                        dateFormat: 'Y-m-d',
+                        locale: 'id',
+                    });
+                }
+            }"
             {{ $attributes->class([
-                'block w-full text-sm rounded-md border-0 py-2.5 pl-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-primary',
+                'block w-full text-sm rounded-md border-0 py-2.5 pl-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary',
             ]) }}>
 
         @error($attributes->whereStartsWith('wire:model')->first())
